@@ -1,0 +1,87 @@
+### Test ContactService API Endpoints
+
+### 1. Create Contact
+POST http://localhost:7001/api/v1/contacts
+Content-Type: application/json
+
+{
+  "name": "Ahmet Yılmaz",
+  "company": "ABC Teknoloji",
+  "contactInfos": [
+    {
+      "infoType": 1,
+      "infoValue": "+905551234567"
+    },
+    {
+      "infoType": 2,
+      "infoValue": "ahmet@abc.com"
+    },
+    {
+      "infoType": 3,
+      "infoValue": "İstanbul"
+    }
+  ]
+}
+
+### 2. Get All Contacts
+GET http://localhost:7001/api/v1/contacts
+
+### 3. Get Contact By ID (replace with actual ID)
+GET http://localhost:7001/api/v1/contacts/{{contactId}}
+
+### 4. Update Contact (replace with actual ID)
+PUT http://localhost:7001/api/v1/contacts/{{contactId}}
+Content-Type: application/json
+
+{
+  "id": "{{contactId}}",
+  "name": "Ahmet Mehmet Yılmaz",
+  "company": "XYZ Teknoloji",
+  "contactInfos": [
+    {
+      "infoType": 1,
+      "infoValue": "+905559876543"
+    },
+    {
+      "infoType": 2,
+      "infoValue": "ahmet.mehmet@xyz.com"
+    }
+  ]
+}
+
+### 5. Add Contact Info (replace with actual contact ID)
+POST http://localhost:7001/api/v1/contacts/{{contactId}}/contact-info
+Content-Type: application/json
+
+{
+  "contactId": "{{contactId}}",
+  "infoType": 3,
+  "infoValue": "Ankara"
+}
+
+### 6. Remove Contact Info (replace with actual IDs)
+DELETE http://localhost:7001/api/v1/contacts/{{contactId}}/contact-info/{{contactInfoId}}
+
+### 7. Get Contacts by Location
+GET http://localhost:7001/api/v1/contacts/location/İstanbul
+
+### 8. Delete Contact (replace with actual ID)
+DELETE http://localhost:7001/api/v1/contacts/{{contactId}}
+
+### GraphQL Queries for Comparison
+
+### GraphQL - Get All Contacts
+POST http://localhost:7001/graphql
+Content-Type: application/json
+
+{
+  "query": "{ contacts { id name company } }"
+}
+
+### GraphQL - Create Contact
+POST http://localhost:7001/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { createContact(input: { name: \"GraphQL User\", company: \"GraphQL Corp\", contactInfos: [{ infoType: 1, infoValue: \"+905551111111\" }] }) { id name company } }"
+}

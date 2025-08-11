@@ -1,0 +1,61 @@
+
+
+# This override file is used for local development
+# It adds volume mounts for code changes and development-specific settings
+
+services:
+  # Infrastructure services remain the same as in compose.yaml
+
+  # Development configuration for ContactService.Api
+  contactservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      # Enable detailed logging for development
+      - Serilog__MinimumLevel__Default=Debug
+      - Serilog__MinimumLevel__Override__Microsoft=Information
+    volumes:
+      # For local development without rebuilding
+      - ./ContactService.Api/bin/Debug/net8.0:/app
+      # Mount logs directory for persistence
+      - ./logs/contactservice:/app/logs
+
+  # Development configuration for ReportService.Api
+  reportservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=5329
+      # Use development Kafka topics
+      - Kafka__ReportRequestsTopic=report-requests-dev
+      - Kafka__ReportCompletedTopic=report-completed-dev
+      # Enable detailed logging for development
+      - Serilog__MinimumLevel__Default=Debug
+      - Serilog__MinimumLevel__Override__Microsoft=Information
+    volumes:
+      # For local development without rebuilding
+      - ./ReportService.Api/bin/Debug/net8.0:/app
+      # Mount logs directory for persistence
+      - ./logs/reportservice:/app/logs
+
+
+  # Development configuration for NotificationService.Api
+  notificationservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      # Use development Kafka topics
+      - Kafka__ReportCompletedTopic=report-completed-dev
+      - Kafka__NotificationsTopic=notifications-dev
+      - Kafka__ErrorTopic=notification-errors-dev
+      # Enable detailed logging for development
+      - Serilog__MinimumLevel__Default=Debug
+      - Serilog__MinimumLevel__Override__Microsoft=Information
+      # Use development email settings
+      - EmailProvider__SmtpServer=smtp.ethereal.email
+      - EmailProvider__Username=test@example.com
+      - EmailProvider__Password=testpassword
+    volumes:
+      # For local development without rebuilding
+      - ./NotificationService.Api/bin/Debug/net8.0:/app
+      # Mount logs directory for persistence
+      - ./logs/notificationservice:/app/logs

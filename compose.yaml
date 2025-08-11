@@ -1,0 +1,246 @@
+﻿services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: PhoneBookDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - phonebook_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7
+    environment:
+      MONGO_INITDB_DATABASE: ReportServiceDB
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - phonebook_network
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok' | grep 1 >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    networks:
+      - phonebook_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      - zookeeper_data:/var/lib/zookeeper/data
+      - zookeeper_log:/var/lib/zookeeper/log
+    networks:
+      - phonebook_network
+    healthcheck:
+      test: echo srvr | nc zookeeper 2181 || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    ports:
+      - "9092:9092"
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+    networks:
+      - phonebook_network
+    healthcheck:
+      test: kafka-topics --bootstrap-server kafka:29092 --list || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+      
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - "5800:8080"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    networks:
+      - phonebook_network
+      
+  kafka-setup:
+    image: confluentinc/cp-kafka:7.3.0
+    depends_on:
+      kafka:
+        condition: service_healthy
+    volumes:
+      - ./scripts:/scripts
+    entrypoint: ["/bin/bash", "/scripts/init-kafka.sh"]
+    restart: on-failure
+    networks:
+      - phonebook_network
+
+  contactservice.api:
+    image: contactservice.api
+    build:
+      context: .
+      dockerfile: ContactService.Api/Dockerfile
+    ports:
+      - "7001:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=PhoneBookDb;Username=postgres;Password=postgres
+      - ConnectionStrings__MongoDB=mongodb://mongodb:27017/PhoneBookDb
+      - ASPNETCORE_URLS=http://+:8080
+      - Kafka__BootstrapServers=kafka:29092
+      - Kafka__ClientId=contact-service
+      - Kafka__GroupId=contact-service-group
+      - Redis__ConnectionString=redis:6379
+      - Redis__Enabled=true
+      - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+    networks:
+      - phonebook_network
+    healthcheck:
+      test: curl --fail http://localhost:8080/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  reportservice.api:
+    image: reportservice.api
+    build:
+      context: .
+      dockerfile: ReportService.Api/Dockerfile
+    ports:
+      - "7002:8085"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDbSettings__ConnectionString=mongodb://mongodb:27017
+      - MongoDbSettings__DatabaseName=ReportServiceDB
+      - ContactService__Url=http://contactservice.api:8080
+      - Kafka__BootstrapServers=kafka:29092
+      - Kafka__ClientId=report-service
+      - Kafka__GroupId=report-service-group
+      - Kafka__ReportRequestsTopic=report-requests
+      - Kafka__ReportCompletedTopic=report-completed
+      - ASPNETCORE_URLS=http://+:8085
+      - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+    networks:
+      - phonebook_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:8085/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+      
+
+
+  notificationservice.api:
+    image: notificationservice.api
+    build:
+      context: .
+      dockerfile: NotificationService.Api/Dockerfile
+    ports:
+      - "7003:8080"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDb__ConnectionString=mongodb://mongodb:27017
+      - MongoDb__DatabaseName=ReportServiceDB
+      - ContactService__Url=http://contactservice.api:8080
+      - Kafka__BootstrapServers=kafka:29092
+      - Kafka__GroupId=notification-service-consumer
+      - Kafka__ReportCompletedTopic=report-completed
+      - Kafka__NotificationsTopic=notifications
+      - Kafka__ErrorTopic=notification-errors
+      - ASPNETCORE_URLS=http://+:8080
+      - EmailProvider__SmtpServer=smtp.ethereal.email
+      - EmailProvider__SmtpPort=587
+      - EmailProvider__EnableSsl=true
+      - EmailProvider__Username=test@example.com
+      - EmailProvider__Password=testpassword
+      - EmailProvider__IsEnabled=true
+      - SmsProvider__ApiKey=test-api-key
+      - SmsProvider__ApiSecret=test-api-secret
+      - SmsProvider__ApiUrl=https://api.example.com/sms
+      - SmsProvider__IsEnabled=true
+      - DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+    networks:
+      - phonebook_network
+    healthcheck:
+      test: curl --fail http://localhost:8080/health || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  zookeeper_data:
+  zookeeper_log:
+  kafka_data:
+
+networks:
+  phonebook_network:
+    driver: bridge
+  
+

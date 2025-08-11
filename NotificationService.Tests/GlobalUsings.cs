@@ -1,0 +1,12 @@
+global using Xunit;
+global using Moq;
+global using FluentAssertions;
+global using Microsoft.Extensions.Logging;
+global using NotificationService.Domain.Entities;
+global using NotificationService.Domain.Enums;
+global using NotificationService.Domain.Interfaces;
+global using NotificationService.ApplicationService.Handlers.Commands;
+global using NotificationService.ApplicationService.Handlers.Queries;
+global using NotificationService.ApiContract.Request;
+global using NotificationService.ApiContract.Response;
+global using Shared.CrossCutting.Models;

@@ -1,0 +1,39 @@
+### Test CreateContact with Valid Data
+POST http://localhost:5000/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { createContact(input: { name: \"Ahmet Yılmaz\", company: \"ABC Teknoloji\", contactInfos: [{ infoType: 1, infoValue: \"+905551234567\" }] }) { id name company } }"
+}
+
+### Test CreateContact with Invalid Name (too short)
+POST http://localhost:5000/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { createContact(input: { name: \"A\", company: \"ABC Teknoloji\", contactInfos: [{ infoType: 1, infoValue: \"+905551234567\" }] }) { id name company } }"
+}
+
+### Test CreateContact with Invalid Phone Number
+POST http://localhost:5000/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { createContact(input: { name: \"Ahmet Yılmaz\", company: \"ABC Teknoloji\", contactInfos: [{ infoType: 1, infoValue: \"invalid-phone\" }] }) { id name company } }"
+}
+
+### Test CreateContact with Empty Name
+POST http://localhost:5000/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { createContact(input: { name: \"\", company: \"ABC Teknoloji\", contactInfos: [{ infoType: 1, infoValue: \"+905551234567\" }] }) { id name company } }"
+}
+
+### Test CreateContact with Invalid Email
+POST http://localhost:5000/graphql
+Content-Type: application/json
+
+{
+  "query": "mutation { createContact(input: { name: \"Ahmet Yılmaz\", company: \"ABC Teknoloji\", contactInfos: [{ infoType: 2, infoValue: \"invalid-email\" }] }) { id name company } }"
+}

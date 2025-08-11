@@ -1,0 +1,324 @@
+Summary
+  Generated on: 8/10/2025 - 3:01:13 AM
+  Coverage date: 8/7/2025 - 3:03:44 PM - 8/10/2025 - 2:59:10 AM
+  Parser: MultiReport (31x Cobertura)
+  Assemblies: 19
+  Classes: 266
+  Files: 228
+  Line coverage: 38.9%
+  Covered lines: 3842
+  Uncovered lines: 6015
+  Coverable lines: 9857
+  Total lines: 16115
+  Branch coverage: 36.1% (607 of 1679)
+  Covered branches: 607
+  Total branches: 1679
+  Method coverage: 48.5% (701 of 1445)
+  Full method coverage: 39.9% (577 of 1445)
+  Covered methods: 701
+  Fully covered methods: 577
+  Total methods: 1445
+
+ContactService.Api                                                                               61.8%
+  ContactService.Api.Controllers.ContactsController                                              89.1%
+  ContactService.Api.Middleware.AuditLoggingMiddleware                                             81%
+  ContactService.Api.Middleware.CorrelationIdMiddleware                                           100%
+  ContactService.Api.Middleware.GlobalExceptionHandler                                           67.9%
+  Program                                                                                           0%
+
+ContactService.ApiContract                                                                       59.4%
+  ContactService.ApiContract.Contracts.ContactDto                                                 100%
+  ContactService.ApiContract.Contracts.ContactHistoryDto                                            0%
+  ContactService.ApiContract.Contracts.ContactHistoryListDto                                        0%
+  ContactService.ApiContract.Contracts.ContactInfoDto                                             100%
+  ContactService.ApiContract.Contracts.ContactReplayResultDto                                       0%
+  ContactService.ApiContract.Contracts.ContactSummaryDto                                          100%
+  ContactService.ApiContract.Contracts.CreateContactDto                                             0%
+  ContactService.ApiContract.Contracts.CreateContactInfoDto                                       100%
+  ContactService.ApiContract.Contracts.LocationStatisticsDto                                        0%
+  ContactService.ApiContract.Contracts.ReportDto                                                    0%
+  ContactService.ApiContract.Contracts.UpdateContactDto                                             0%
+  ContactService.ApiContract.Contracts.UpdateContactInfoDto                                      66.6%
+  ContactService.ApiContract.GraphQL.Inputs.AddContactInfoInput                                     0%
+  ContactService.ApiContract.GraphQL.Inputs.CreateContactInfoInput                                  0%
+  ContactService.ApiContract.GraphQL.Inputs.CreateContactInput                                      0%
+  ContactService.ApiContract.GraphQL.Inputs.UpdateContactInfoInput                                  0%
+  ContactService.ApiContract.GraphQL.Inputs.UpdateContactInput                                      0%
+  ContactService.ApiContract.GraphQL.Types.ContactInfoType                                          0%
+  ContactService.ApiContract.GraphQL.Types.ContactSummaryType                                       0%
+  ContactService.ApiContract.GraphQL.Types.ContactType                                              0%
+  ContactService.ApiContract.GraphQL.Types.LocationStatisticsType                                   0%
+  ContactService.ApiContract.Request.Commands.AddContactInfoCommand                               100%
+  ContactService.ApiContract.Request.Commands.CreateContactCommand                                100%
+  ContactService.ApiContract.Request.Commands.DeleteContactCommand                                100%
+  ContactService.ApiContract.Request.Commands.RemoveContactInfoCommand                            100%
+  ContactService.ApiContract.Request.Commands.UpdateContactCommand                                100%
+  ContactService.ApiContract.Request.Queries.GetAllContactsQuery                                  100%
+  ContactService.ApiContract.Request.Queries.GetAllReportsQuery                                     0%
+  ContactService.ApiContract.Request.Queries.GetContactByIdQuery                                  100%
+  ContactService.ApiContract.Request.Queries.GetContactHistoryQuery                                 0%
+  ContactService.ApiContract.Request.Queries.GetContactInfosByTypeQuery                             0%
+  ContactService.ApiContract.Request.Queries.GetContactsByLocationQuery                            75%
+  ContactService.ApiContract.Request.Queries.GetHistoryByCorrelationIdQuery                         0%
+  ContactService.ApiContract.Request.Queries.GetHistoryByDateRangeQuery                             0%
+  ContactService.ApiContract.Request.Queries.GetHistoryByOperationTypeQuery                         0%
+  ContactService.ApiContract.Request.Queries.GetReportByIdQuery                                     0%
+  ContactService.ApiContract.Request.Queries.ReplayContactStateQuery                                0%
+  ContactService.ApiContract.Request.Queries.SearchContactsQuery                                    0%
+  ContactService.ApiContract.Response.Commands.AddContactInfoResponse                             100%
+  ContactService.ApiContract.Response.Commands.CreateContactResponse                              100%
+  ContactService.ApiContract.Response.Commands.UpdateContactResponse                              100%
+  ContactService.ApiContract.Response.Queries.ContactsByLocationResponse                            0%
+  ContactService.ApiContract.Response.Queries.GetAllContactsResponse                                0%
+  ContactService.ApiContract.Response.Queries.GetAllReportsResponse                                 0%
+  ContactService.ApiContract.Response.Queries.GetContactByIdResponse                                0%
+  ContactService.ApiContract.Response.Queries.LocationStatisticsResponse                          100%
+  ContactService.ApiContract.Validations.AddContactInfoCommandValidator                           100%
+  ContactService.ApiContract.Validations.CreateContactCommandValidator                            100%
+  ContactService.ApiContract.Validations.CreateContactInfoDtoValidator                            100%
+  ContactService.ApiContract.Validations.RemoveContactInfoCommandValidator                        100%
+  ContactService.ApiContract.Validations.UpdateContactCommandValidator                            100%
+  ContactService.ApiContract.Validations.UpdateContactInfoDtoValidator                             96%
+
+ContactService.ApplicationService                                                                63.3%
+  ContactService.ApplicationService.BackgroundServices.OutboxProcessorService                       0%
+  ContactService.ApplicationService.Behaviors.CorrelationBehavior<T1, T2>                         100%
+  ContactService.ApplicationService.Behaviors.CorrelationIdBehavior<T1, T2>                       100%
+  ContactService.ApplicationService.Behaviors.ValidationBehavior<T1, T2>                          100%
+  ContactService.ApplicationService.Handlers.Commands.AddContactInfoHandler                      92.9%
+  ContactService.ApplicationService.Handlers.Commands.CreateContactHandler                        100%
+  ContactService.ApplicationService.Handlers.Commands.DeleteContactHandler                        100%
+  ContactService.ApplicationService.Handlers.Commands.RemoveContactInfoHandler                    100%
+  ContactService.ApplicationService.Handlers.Commands.UpdateContactHandler                       97.8%
+  ContactService.ApplicationService.Handlers.Queries.GetAllContactsHandler                       89.8%
+  ContactService.ApplicationService.Handlers.Queries.GetContactByIdHandler                       48.9%
+  ContactService.ApplicationService.Handlers.Queries.GetContactHistoryQueryHandler                  0%
+  ContactService.ApplicationService.Handlers.Queries.GetContactsByLocationHandler                68.2%
+  ContactService.ApplicationService.Handlers.Queries.GetHistoryByCorrelationIdQueryHandler          0%
+  ContactService.ApplicationService.Handlers.Queries.GetHistoryByOperationTypeQueryHandler          0%
+  ContactService.ApplicationService.Handlers.Queries.GetLocationStatisticsQueryHandler             80%
+  ContactService.ApplicationService.Handlers.Queries.ReplayContactStateQueryHandler                 0%
+  ContactService.ApplicationService.Helpers.EnumHelper                                           94.1%
+  ContactService.ApplicationService.Services.CachedContactService                                64.8%
+  ContactService.ApplicationService.Services.CacheInvalidationService                               0%
+  ContactService.ApplicationService.Services.ContactCreateData                                      0%
+  ContactService.ApplicationService.Services.ContactHistoryService                                  0%
+  ContactService.ApplicationService.Services.ContactInfoData                                        0%
+  ContactService.ApplicationService.Services.ContactService                                      85.7%
+  ContactService.ApplicationService.Services.ContactUpdateData                                      0%
+  ContactService.ApplicationService.Services.OutboxService                                       80.1%
+  ContactService.ApplicationService.Worker.OutboxProcessorWorker                                 71.5%
+
+ContactService.Container                                                                            0%
+  ContactService.Container.ServiceCollectionExtensions                                              0%
+
+ContactService.Domain                                                                            71.3%
+  ContactService.Domain.AppMessage                                                                100%
+  ContactService.Domain.Entities.AuditLog                                                        53.9%
+  ContactService.Domain.Entities.Contact                                                         71.9%
+  ContactService.Domain.Entities.ContactHistory                                                  92.3%
+  ContactService.Domain.Entities.ContactInfo                                                     83.3%
+  ContactService.Domain.Entities.OutboxEvent                                                     74.1%
+  ContactService.Domain.Events.ContactChangeData                                                    0%
+  ContactService.Domain.Events.ContactCreatedEvent                                                100%
+  ContactService.Domain.Events.ContactDeletedEvent                                                100%
+  ContactService.Domain.Events.ContactInfoAddedEvent                                              100%
+  ContactService.Domain.Events.ContactInfoEventData                                               100%
+  ContactService.Domain.Events.ContactUpdatedEvent                                                100%
+  ContactService.Domain.Interfaces.AuditStatistics                                                  0%
+  ContactService.Domain.Interfaces.LocationStatistic                                                0%
+  ContactService.Domain.Interfaces.OutboxEventStatistics                                          100%
+  ContactService.Domain.Models.LocationStatistic                                                  100%
+  ContactService.Domain.Services.ContactDomainService                                               0%
+
+ContactService.Infrastructure                                                                    27.4%
+  ContactService.Infrastructure.Configuration.KafkaProducerConfig                                 100%
+  ContactService.Infrastructure.Configuration.KafkaSettings                                       100%
+  ContactService.Infrastructure.Configuration.KafkaTopics                                         100%
+  ContactService.Infrastructure.Configuration.RedisSettings                                       100%
+  ContactService.Infrastructure.Data.CommunicationInfo                                              0%
+  ContactService.Infrastructure.Data.Configurations.ContactConfiguration                         86.2%
+  ContactService.Infrastructure.Data.Configurations.ContactHistoryConfiguration                   100%
+  ContactService.Infrastructure.Data.Configurations.ContactInfoConfiguration                      100%
+  ContactService.Infrastructure.Data.Configurations.OutboxEventConfiguration                      100%
+  ContactService.Infrastructure.Data.ContactDbContext                                             100%
+  ContactService.Infrastructure.Data.MongoDbContext                                              13.8%
+  ContactService.Infrastructure.Data.PerformanceMetric                                              0%
+  ContactService.Infrastructure.Data.SystemLog                                                      0%
+  ContactService.Infrastructure.HealthChecks.ApplicationHealthCheck                                 0%
+  ContactService.Infrastructure.HealthChecks.AuditLogHealthCheck                                    0%
+  ContactService.Infrastructure.HealthChecks.KafkaHealthCheck                                       0%
+  ContactService.Infrastructure.HealthChecks.OutboxHealthCheck                                      0%
+  ContactService.Infrastructure.HealthChecks.RedisHealthCheck                                       0%
+  ContactService.Infrastructure.Migrations.ContactDbContextModelSnapshot                            0%
+  ContactService.Infrastructure.Migrations.InitialCreate                                            0%
+  ContactService.Infrastructure.Repositories.ContactHistoryRepository                            92.7%
+  ContactService.Infrastructure.Repositories.ContactRepository                                      0%
+  ContactService.Infrastructure.Repositories.MongoAuditLogRepository                             84.5%
+  ContactService.Infrastructure.Repositories.OutboxRepository                                     100%
+  ContactService.Infrastructure.Services.AuditLogService                                            0%
+  ContactService.Infrastructure.Services.CommunicationInfoService                                   0%
+  ContactService.Infrastructure.Services.CorrelationContext                                       100%
+  ContactService.Infrastructure.Services.KafkaProducer                                              0%
+  ContactService.Infrastructure.Services.RedisCacheService                                          0%
+
+NotificationService.Api                                                                          47.2%
+  NotificationService.Api.Controllers.HealthController                                            100%
+  NotificationService.Api.Controllers.NotificationsController                                     100%
+  Program                                                                                           0%
+
+NotificationService.ApiContract                                                                  80.5%
+  NotificationService.ApiContract.Contracts.External.NotificationAllContactsResponse                0%
+  NotificationService.ApiContract.Contracts.External.NotificationContactDto                         0%
+  NotificationService.ApiContract.Contracts.External.NotificationContactsByLocationResponse         0%
+  NotificationService.ApiContract.Request.GetByCorrelationIdRequest                                 0%
+  NotificationService.ApiContract.Request.GetUserNotificationsRequest                               0%
+  NotificationService.ApiContract.Request.SendNotificationRequest                                 100%
+  NotificationService.ApiContract.Response.GetByCorrelationIdResponse                             100%
+  NotificationService.ApiContract.Response.GetUserNotificationsResponse                           100%
+  NotificationService.ApiContract.Response.NotificationResponse                                   100%
+  NotificationService.ApiContract.Response.SendNotificationResponse                               100%
+
+NotificationService.ApplicationService                                                           34.6%
+  NotificationService.ApplicationService.AssemblyReference                                          0%
+  NotificationService.ApplicationService.Communicator.Contact.AllContactsResponse                   0%
+  NotificationService.ApplicationService.Communicator.Contact.ContactGraphQLSummary                 0%
+  NotificationService.ApplicationService.Communicator.Contact.ContactsByLocationResponse            0%
+  NotificationService.ApplicationService.Communicator.Contact.ContactServiceClient                  0%
+  NotificationService.ApplicationService.Communicator.Contact.NotificationContactServiceClient      0%
+  NotificationService.ApplicationService.Handlers.Commands.SendNotificationCommand                100%
+  NotificationService.ApplicationService.Handlers.Commands.SendNotificationCommandHandler         100%
+  NotificationService.ApplicationService.Handlers.Queries.GetByCorrelationIdQuery                 100%
+  NotificationService.ApplicationService.Handlers.Queries.GetByCorrelationIdQueryHandler          100%
+  NotificationService.ApplicationService.Handlers.Queries.GetUserNotificationsQuery               100%
+  NotificationService.ApplicationService.Handlers.Queries.GetUserNotificationsQueryHandler        100%
+  NotificationService.ApplicationService.Models.KafkaMessage<T>                                     0%
+  NotificationService.ApplicationService.Models.KafkaSettings                                       0%
+  NotificationService.ApplicationService.Models.MessageSource                                       0%
+  NotificationService.ApplicationService.Models.NotificationPreferences                             0%
+  NotificationService.ApplicationService.Models.ReportCompletedEvent                                0%
+  NotificationService.ApplicationService.Models.ReportSummary                                       0%
+  NotificationService.ApplicationService.Services.NotificationProviderManager                     100%
+  NotificationService.ApplicationService.Services.NotificationService                            88.6%
+  NotificationService.ApplicationService.Services.ReportGenerator                                   0%
+  NotificationService.ApplicationService.Services.ReportProcessingService                           0%
+  NotificationService.ApplicationService.Services.TemplateService                                   0%
+  NotificationService.ApplicationService.Worker.ReportCompletedWorker                               0%
+
+NotificationService.Container                                                                       0%
+  NotificationService.Container.ServiceCollectionExtensions                                         0%
+
+NotificationService.Domain                                                                       71.4%
+  NotificationService.Domain.AppMessage                                                             0%
+  NotificationService.Domain.Entities.ContactInfoSummary                                            0%
+  NotificationService.Domain.Entities.ContactSummary                                                0%
+  NotificationService.Domain.Entities.Notification                                                 93%
+  NotificationService.Domain.Entities.NotificationResult                                          100%
+  NotificationService.Domain.Entities.NotificationTemplate                                          0%
+  NotificationService.Domain.Interfaces.ProviderHealthStatus                                      100%
+
+NotificationService.Infrastructure                                                               27.4%
+  NotificationService.Infrastructure.Consumers.ReportCompletedConsumer                              0%
+  NotificationService.Infrastructure.Data.Mapping.NotificationEntityMapping                         0%
+  NotificationService.Infrastructure.Data.MongoDbContext                                            0%
+  NotificationService.Infrastructure.Data.MongoDbSettings                                           0%
+  NotificationService.Infrastructure.HealthChecks.ApplicationHealthCheck                            0%
+  NotificationService.Infrastructure.HealthChecks.KafkaHealthCheck                                  0%
+  NotificationService.Infrastructure.HealthChecks.NotificationProvidersHealthCheck                  0%
+  NotificationService.Infrastructure.KafkaMessage<T>                                                0%
+  NotificationService.Infrastructure.KafkaSettings                                                  0%
+  NotificationService.Infrastructure.MessageSource                                                  0%
+  NotificationService.Infrastructure.NotificationPreferences                                        0%
+  NotificationService.Infrastructure.Providers.EmailProvider                                     82.1%
+  NotificationService.Infrastructure.Providers.EmailProviderSettings                              100%
+  NotificationService.Infrastructure.Providers.SmsProvider                                        100%
+  NotificationService.Infrastructure.Providers.SmsProviderSettings                                100%
+  NotificationService.Infrastructure.ReportCompletedEvent                                           0%
+  NotificationService.Infrastructure.ReportSummary                                                  0%
+  NotificationService.Infrastructure.Repositories.NotificationRepository                            0%
+  NotificationService.Infrastructure.Repositories.NotificationTemplateRepository                    0%
+
+ReportService.Api                                                                                18.3%
+  Program                                                                                           0%
+  ReportService.Api.Controllers.ReportsController                                                 100%
+  ReportService.Api.Middleware.CorrelationIdMiddleware                                              0%
+
+ReportService.ApiContract                                                                        69.5%
+  ReportService.ApiContract.Contracts.CreateReportDto                                               0%
+  ReportService.ApiContract.Contracts.External.ReportAllContactsResponse                            0%
+  ReportService.ApiContract.Contracts.External.ReportContactDto                                     0%
+  ReportService.ApiContract.Contracts.LocationStatisticDto                                        100%
+  ReportService.ApiContract.Contracts.ReportDto                                                   100%
+  ReportService.ApiContract.Request.Commands.CreateReportCommand                                  100%
+  ReportService.ApiContract.Request.Queries.GetAllReportsQuery                                   66.6%
+  ReportService.ApiContract.Request.Queries.GetReportByIdQuery                                    100%
+  ReportService.ApiContract.Response.Commands.CreateReportResponse                                100%
+
+ReportService.ApplicationService                                                                 34.4%
+  ReportService.ApplicationService.Handlers.Commands.CreateReportHandler                         86.6%
+  ReportService.ApplicationService.Handlers.Queries.GetAllReportsHandler                         81.8%
+  ReportService.ApplicationService.Handlers.Queries.GetReportByIdHandler                          100%
+  ReportService.ApplicationService.Producer.KafkaProducer                                           0%
+  ReportService.ApplicationService.Services.Kafka.KafkaProducer                                     0%
+  ReportService.ApplicationService.Services.ReportService                                           0%
+  ReportService.ApplicationService.Worker.ReportConsumerWorker                                      0%
+
+ReportService.Container                                                                             0%
+  ReportService.Container.ServiceCollectionExtensions                                               0%
+
+ReportService.Domain                                                                             34.8%
+  ReportService.Domain.AppMessage                                                                   0%
+  ReportService.Domain.Entities.ContactInfo                                                         0%
+  ReportService.Domain.Entities.ContactLocationStats                                                0%
+  ReportService.Domain.Entities.ContactSummary                                                      0%
+  ReportService.Domain.Entities.LocationStatistic                                                40.9%
+  ReportService.Domain.Entities.Report                                                             50%
+  ReportService.Domain.Events.ReportCompletedEvent                                                  0%
+  ReportService.Domain.Events.ReportRequestedEvent                                                100%
+  ReportService.Domain.Events.ReportSummary                                                         0%
+  ReportService.Domain.Interfaces.ContactInfoSummary                                                0%
+  ReportService.Domain.Interfaces.LocationStatisticData                                             0%
+  ReportService.Domain.Interfaces.ReportGenerationResult                                            0%
+  ReportService.Domain.Models.Kafka.ReportCompletedMessage                                          0%
+  ReportService.Domain.Models.Kafka.ReportRequestMessage                                          100%
+
+ReportService.Infrastructure                                                                      5.7%
+  ReportService.Infrastructure.Configuration.KafkaSettings                                        100%
+  ReportService.Infrastructure.Configuration.KafkaTopics                                          100%
+  ReportService.Infrastructure.Configuration.MongoDbSettings                                        0%
+  ReportService.Infrastructure.Consumers.ReportCompletedConsumer                                    0%
+  ReportService.Infrastructure.Consumers.ReportRequestConsumer                                      0%
+  ReportService.Infrastructure.Data.Mapping.ReportEntityMapping                                     0%
+  ReportService.Infrastructure.Data.ReportMongoContext                                              0%
+  ReportService.Infrastructure.HealthChecks.ApplicationHealthCheck                                  0%
+  ReportService.Infrastructure.HealthChecks.ContactServiceHealthCheck                               0%
+  ReportService.Infrastructure.HealthChecks.KafkaHealthCheck                                        0%
+  ReportService.Infrastructure.Repositories.ReportRepository                                        0%
+  ReportService.Infrastructure.Services.AllContactsApiResponse                                      0%
+  ReportService.Infrastructure.Services.ContactDto                                                  0%
+  ReportService.Infrastructure.Services.ContactsByLocationApiResponse                               0%
+  ReportService.Infrastructure.Services.ContactServiceClient                                        0%
+  ReportService.Infrastructure.Services.KafkaConsumerService                                        0%
+  ReportService.Infrastructure.Services.KafkaEventPublisher                                         0%
+  ReportService.Infrastructure.Services.KafkaSettings                                               0%
+  ReportService.Infrastructure.Services.KafkaTopics                                                 0%
+  ReportService.Infrastructure.Services.LocationStatisticDto                                        0%
+  ReportService.Infrastructure.Services.LocationStatisticsApiResponse                               0%
+  ReportService.Infrastructure.Services.PagedContactsDto                                            0%
+  ReportService.Infrastructure.Services.ReportConsumerWorker                                     95.2%
+  ReportService.Infrastructure.Services.ReportFileData                                              0%
+  ReportService.Infrastructure.Services.ReportGenerationService                                     0%
+  ReportService.Infrastructure.Services.ReportProcessingService                                     0%
+
+Shared.CrossCutting                                                                              20.1%
+  Shared.CrossCutting.CorrelationId.CorrelationIdProvider                                           0%
+  Shared.CrossCutting.Extensions.CorrelationIdServiceExtensions                                     0%
+  Shared.CrossCutting.Extensions.EnumHelperExtension                                             16.3%
+  Shared.CrossCutting.Kafka.KafkaCorrelationIdExtensions                                            0%
+  Shared.CrossCutting.Middleware.CorrelationIdMiddleware                                            0%
+  Shared.CrossCutting.Models.ApiError                                                            72.7%
+  Shared.CrossCutting.Models.ApiResponse                                                         94.1%
+  Shared.CrossCutting.Models.ApiResponse<T>                                                       100%
+  Shared.CrossCutting.Models.PageResponse                                                        28.5%
+  Shared.CrossCutting.Models.PageResponse<T>                                                     43.4%
+  Shared.CrossCutting.Models.Pagination<T>                                                       76.1%
